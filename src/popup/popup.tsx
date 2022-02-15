@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './popup.css'
+import { searchNLB } from '.././utils/api'
+
+
 
 const App: React.FC<{}> = () => {
+  useEffect(() => {
+    searchNLB()
+  }, [])
+
   return (
     <div>
-      <img src="icon.png" />
+      <p>Hello World</p>
     </div>
   )
 }

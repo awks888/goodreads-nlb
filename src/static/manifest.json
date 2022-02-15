@@ -1,5 +1,5 @@
 {
-  "name": "React Extension",
+  "name": "Goodreads NLB",
   "description": "Chrome Extension in React!",
   "version": "1.0.0",
   "manifest_version": 3,
@@ -10,18 +10,24 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "React Extension",
-    "default_icon": "icon.png"
+    "default_title": "Goodreads NLB",
+    "default_icon": "goodreads.png"
   },
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["contentScript.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
     }
   ]
 }
