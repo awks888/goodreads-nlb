@@ -58,15 +58,15 @@ export async function searchNLB(): Promise<string> {
         <cat:SearchItems>\
            <cat:SearchItem>\
               <cat:SearchField>Title</cat:SearchField>\
-              <cat:SearchTerms>Of Mice and Men</cat:SearchTerms>\
+              <cat:SearchTerms>Moby-Dick or, the Whale</cat:SearchTerms>\
            </cat:SearchItem>\
            <cat:SearchItem>\
               <cat:SearchField>Author</cat:SearchField>\
-              <cat:SearchTerms>John</cat:SearchTerms>\
+              <cat:SearchTerms>Herman</cat:SearchTerms>\
            </cat:SearchItem>\
            <cat:SearchItem>\
            <cat:SearchField>Author</cat:SearchField>\
-           <cat:SearchTerms>Steinbeck</cat:SearchTerms>\
+           <cat:SearchTerms>Melville</cat:SearchTerms>\
         </cat:SearchItem>\
         </cat:SearchItems>\
         <cat:Modifiers>\

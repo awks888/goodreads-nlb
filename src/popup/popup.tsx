@@ -20,6 +20,7 @@ const App: React.FC<{}> = () => {
   return (
     <div>
       <p>Hello World</p>
+      <img className="searchLogo" src="/goodreads.png"></img>
       <p className="response">{text}</p>
     </div>
   )

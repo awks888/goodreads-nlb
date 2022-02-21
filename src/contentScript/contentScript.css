@@ -1,0 +1,39 @@
+.searchButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 110px;
+    height: 29px;
+    left: 195px;
+    top: 562px;
+    margin-left: 8px;
+
+    background: #FFFFFF;
+    border: 1px solid #FF6720;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.searchButton:hover {
+    cursor: pointer;
+    background: #FF6720;
+}
+
+.searchCTA {
+    margin: 0px;
+
+    font-family: Merriweather;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+.searchCTA:hover {
+    color: #FFFFFF;
+}
+
+.searchLogo {
+    max-height: 19px;
+}
