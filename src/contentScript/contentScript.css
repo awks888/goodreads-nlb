@@ -30,7 +30,7 @@
     line-height: 15px;
 }
 
-.searchCTA:hover {
+.searchButton:hover .searchCTA {
     color: #FFFFFF;
 }
 
