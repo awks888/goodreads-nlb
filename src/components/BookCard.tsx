@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import './BookCard.css'
+import sampleAvailability from '../utils/sampleAvailabilityResponse'
+import savedLibraries from '../utils/libraries'
+
 
 
 const BookCard: React.FC<{
@@ -9,18 +12,52 @@ const BookCard: React.FC<{
     titleName: string,
     author: string,
     publishYear: string,
-    parentClick: any,
+    loadOverlay: any,
     key: number
-}> = ({ id, bid, isbn, titleName, author, publishYear, parentClick, key }) => {
+}> = ({ id, bid, isbn, titleName, author, publishYear, loadOverlay, key }) => {
     const [checked, setChecked] = useState<boolean>(false);
     const [available, setAvailable] = useState<boolean>(false)
     //create 2 array states for libraries
-    const [availableLibraries, setAvailableLibraries] = useState<string[]>(["Serangoon Public Library", "Bishan Public Library", "library@orchard"]);
-    const [loanedLibraries, setLoanedLibraries] = useState<string[]>(["Toa Payoh Public Library", "Choa Chu Kang Public Library", "Central Public Library"]);
+    const [availableLibraries, setAvailableLibraries] = useState<string[]>([]);
+    const [loanedLibraries, setLoanedLibraries] = useState<string[]>([]);
 
+    const sample = sampleAvailability['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item']
+
+    //takes in array of response items and sets the 2 library array states
+    const arrangeLibraries = (collection) => {
+        const availableLibs = [];
+        const loanedLibs = [];
+
+        for (let i = 0; i < collection.length; i++) {
+            //identify all the attributes of the book
+            const libraryCode = collection[i]['BranchID']['_text']
+            const status = collection[i]['StatusDesc']['_text']
+
+            if (libraryCode in savedLibraries) { //check if library is inside the libraries of concern
+                if (savedLibraries[libraryCode]['available'] !== "available") { //if the library is already available let's not process
+                    if (status === "Not on Loan") {
+                        savedLibraries[libraryCode]['available'] = 'available' //if the book is available at this library let's make it available
+                    } else {
+                        savedLibraries[libraryCode]['available'] = 'loaned' //otherwise mark book as loaned
+                    }
+                }
+            }
+        }
+        for (const savedLibrary in savedLibraries) {
+            if (savedLibraries[savedLibrary]['available'] === "available") {
+                availableLibs.push(savedLibraries[savedLibrary]['name'])
+            } else if (savedLibraries[savedLibrary]['available'] === "loaned") {
+                loanedLibs.push(savedLibraries[savedLibrary]['name'])
+            }
+        }
+        setAvailableLibraries(availableLibs)
+        setLoanedLibraries(loanedLibs)
+
+        setChecked(!checked)
+    }
 
     const clickHandler = () => {
-        setChecked(!checked)
+        arrangeLibraries(sample)
     }
 
     return (
@@ -36,7 +73,7 @@ const BookCard: React.FC<{
                         })}
                     </div>
                     <div className="loanedSection">
-                        <p className="loanedTitle">In-transit/On-Loan</p>
+                        <p className="loanedTitle">Loaned/In-transit/Reserved</p>
                         {loanedLibraries.map(function (library, idx) {
                             return (<li className="loanedLibraries" key={idx}>{library}</li>)
                         })}
@@ -45,10 +82,10 @@ const BookCard: React.FC<{
             </div>
             {checked ?
                 <div className="checkAvailButton" onClick={() => {
-                    parentClick(true)
+                    loadOverlay(true)
 
                     // const myTimeOut = setTimeout(() => { parentClick(10000) }, 3000)
-                    setTimeout(() => { parentClick(false) }, 2000);
+                    setTimeout(() => { loadOverlay(false) }, 2000);
 
                 }}>
                     <div className="CTAcontainer">
@@ -57,9 +94,9 @@ const BookCard: React.FC<{
                 </div>
                 :
                 <div className="checkAvailButton" onClick={() => {
-                    parentClick(true)
+                    loadOverlay(true)
                     clickHandler()
-                    setTimeout(() => { parentClick(false) }, 2000);
+                    setTimeout(() => { loadOverlay(false) }, 2000);
 
                 }}>
                     <div className="CTAcontainer">
