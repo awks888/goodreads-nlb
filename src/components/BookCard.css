@@ -124,17 +124,7 @@ p {
 
 /*************** RIGHT SIDE OF CARD ****************/
 
-.checkAvailButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    width: 120px;
-    /* height: 100%; */
-
-    background: #E1DCCD;
-    border-radius: 0px 20px 20px 0px;
-}
+/******** SHARED PARTS ********/
 
 .CTAcontainer {
     max-width: 70%;
@@ -155,6 +145,20 @@ p {
     color: #000000;
 }
 
+/******** CHECK AVAILABILITY: CLICKABLE ********/
+
+.checkAvailButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 120px;
+    /* height: 100%; */
+
+    background: #E1DCCD;
+    border-radius: 0px 20px 20px 0px;
+}
+
 .checkAvailButton:hover {
     cursor: pointer;
     background: #AFA997;
@@ -167,4 +171,30 @@ p {
 .checkAvailButton:active {
     cursor: pointer;
     background: #868173;
+}
+
+/********  AVAILABILITY ALREADY CHECKED ********/
+
+.checkedAvailable {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 120px;
+    /* height: 100%; */
+
+    background: #DAF0CF;
+    border-radius: 0px 20px 20px 0px;
+}
+
+.checkedUnavailable {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 120px;
+    /* height: 100%; */
+
+    background: #FBE8E8;
+    border-radius: 0px 20px 20px 0px;
 }

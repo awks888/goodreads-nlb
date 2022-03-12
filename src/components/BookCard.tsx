@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './BookCard.css'
-import sampleAvailability from '../utils/sampleAvailabilityResponse'
+// import sampleAvailability from '../utils/sampleAvailabilityResponse'
 import savedLibraries from '../utils/libraries'
+const axios = require('axios');
 
 
 
@@ -21,7 +22,7 @@ const BookCard: React.FC<{
     const [availableLibraries, setAvailableLibraries] = useState<string[]>([]);
     const [loanedLibraries, setLoanedLibraries] = useState<string[]>([]);
 
-    const sample = sampleAvailability['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item']
+    // const sample = sampleAvailability['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item']
 
     //takes in array of response items and sets the 2 library array states
     const arrangeLibraries = (collection) => {
@@ -53,11 +54,28 @@ const BookCard: React.FC<{
         setAvailableLibraries(availableLibs)
         setLoanedLibraries(loanedLibs)
 
+        if (availableLibs.length > 0) {
+            setAvailable(true)
+        }
+
         setChecked(!checked)
     }
 
+    //query Availability from NLB API and populate info after. 
+    const queryAvailability = () => {
+        loadOverlay(true)
+        const url = `http://localhost:3000/availability?bid=${bid}`
+
+        axios.get(url).then(resp => {
+            arrangeLibraries(resp.data)
+            console.log(resp)
+            setChecked(true)
+        });
+    }
+
     const clickHandler = () => {
-        arrangeLibraries(sample)
+        queryAvailability()
+        setTimeout(() => { loadOverlay(false) }, 3000);
     }
 
     return (
@@ -71,6 +89,7 @@ const BookCard: React.FC<{
                         {availableLibraries.map(function (library, idx) {
                             return (<li className="availableLibraries" key={idx}>{library}</li>)
                         })}
+                        <p className="author">{available ? "" : "There is no availability for this book."}</p>
                     </div>
                     <div className="loanedSection">
                         <p className="loanedTitle">Loaned/In-transit/Reserved</p>
@@ -81,18 +100,14 @@ const BookCard: React.FC<{
                 </div>}
             </div>
             {checked ?
-                <div className="checkAvailButton" onClick={() => {
-                    loadOverlay(true)
-
-                    // const myTimeOut = setTimeout(() => { parentClick(10000) }, 3000)
-                    setTimeout(() => { loadOverlay(false) }, 2000);
-
-                }}>
+                //an unclickable button state displaying if book is available or not
+                <div className={available ? "checkedAvailable" : "checkedUnavailable"}>
                     <div className="CTAcontainer">
-                        <p className="buttonCTA" >Check Availability</p>
+                        <p className="buttonCTA">{available ? "Available" : "Not Available"}</p>
                     </div>
                 </div>
                 :
+                //a clickable button prompting user to check for the book's availability
                 <div className="checkAvailButton" onClick={() => {
                     loadOverlay(true)
                     clickHandler()
@@ -100,7 +115,7 @@ const BookCard: React.FC<{
 
                 }}>
                     <div className="CTAcontainer">
-                        <p className="buttonCTA">HERE</p>
+                        <p className="buttonCTA">Check Availability</p>
                     </div>
                 </div>
             }

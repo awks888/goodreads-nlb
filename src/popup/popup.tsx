@@ -48,7 +48,7 @@ const App: React.FC<{}> = () => {
     setSearching(show)
   }
 
-  //query titles from NLB API
+  //query titles from NLB API and populate titles after
   const queryTitles = (title: string, author: string[]) => {
     loadOverlay(true)
     let url = "http://localhost:3000/titles?" + `title=${title}`
@@ -57,8 +57,7 @@ const App: React.FC<{}> = () => {
       url = url + `&author=${author[i]}`
     }
     axios.get(url).then(resp => {
-
-      setTitles(resp.data['s:Envelope']['s:Body']['SearchResponse']['Titles']['Title'])
+      setTitles(resp.data)
       setMessage("")
       loadOverlay(false)
     });
