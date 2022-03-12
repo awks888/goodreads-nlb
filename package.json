@@ -23,6 +23,7 @@
     "node-polyfill-webpack-plugin": "^1.1.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-responsive-modal": "^6.2.0",
     "regenerator-runtime": "^0.13.9",
     "stream-browserify": "^3.0.0",
     "strong-soap": "^3.3.1",

@@ -1,0 +1,170 @@
+p {
+    font-family: Georgia;
+}
+
+/*************** ENTIRE CARD ****************/
+
+.titleCard {
+    margin: 10px 0px 10px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+
+    width: 573px;
+    min-height: 137px;
+
+    background: #F2EFE7;
+    border-radius: 20px;
+}
+
+/*************** LEFT SIDE OF CARD ****************/
+
+/******** book title & author info ********/
+
+.bookInfo {
+    width: 453px;
+    padding: 20px 5px 20px 15px;
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-evenly;
+}
+
+.titleName {
+    margin: 0px;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.author {
+    margin: 0px;    
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    /* identical to box height */
+
+    color: #000000;
+}
+
+.bid {
+    margin: 0px;
+
+    font-style: normal;
+    font-weight: 300;
+    font-size: 8px;
+    line-height: 10px;
+    /* identical to box height */
+
+    color: #000000
+}
+
+/******** library info ********/
+
+.libraryInfo {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 40px;
+}
+
+.availableTitle {
+    margin-bottom: 5px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+
+    color: #2C8204;
+}
+
+.loanedTitle {
+    margin-bottom: 5px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+
+
+    color: #A9A9A9;
+}
+
+.availableLibraries {
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+
+    color: #000000;
+}
+
+.loanedLibraries {
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+
+    color: #B9B9B9;
+
+}
+
+
+
+
+/*************** RIGHT SIDE OF CARD ****************/
+
+.checkAvailButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 120px;
+    /* height: 100%; */
+
+    background: #E1DCCD;
+    border-radius: 0px 20px 20px 0px;
+}
+
+.CTAcontainer {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.buttonCTA {
+    align-self: center;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.checkAvailButton:hover {
+    cursor: pointer;
+    background: #AFA997;
+}
+
+.checkAvailButton:hover .buttonCTA {
+    color: #FFFFFF;
+}
+
+.checkAvailButton:active {
+    cursor: pointer;
+    background: #868173;
+}

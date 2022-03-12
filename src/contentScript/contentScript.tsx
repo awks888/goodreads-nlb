@@ -6,8 +6,6 @@ import './contentScript.css'
 const App: React.FC<{}> = () => {
     const [clicked, setClicked] = useState<boolean>(false)
 
-
-
     return <div className="searchButton">
         <img className="searchLogo" src="https://mobileapp.nlb.gov.sg/images/NEW_NLB_mobile-app-icon_dark%20orange_final.png"></img>
         {/* <p className="searchCTA">Search NLB</p> */}

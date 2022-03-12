@@ -29,10 +29,14 @@ export const collectBookInfo = () => {
         }
     }
 
+    //use below here to capture DOM's url
+    // console.log(document.URL)
+
     const data: PageData = {
         title: title,
         authors: authorArray
     }
+
     return data
 }
 
