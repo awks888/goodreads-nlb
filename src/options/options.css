@@ -1,3 +1,96 @@
 body {
-  background-color: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  padding: 20px 35px 20px 35px;
+
+}
+
+h1 {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 45px;
+
+  color: #000000;
+}
+
+h2 {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 19px;
+  
+  color: #000000;
+}
+
+p {
+  font-family: Georgia;
+}
+
+
+.optionsSection {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-around;
+
+  width: 542px;
+  height: 319px;
+  padding: 0px 10px 10px 20px; 
+
+  background: #F2EFE7;
+  border-radius: 34px;
+}
+
+
+.defaultTabSection {
+  display: flex; 
+  flex-direction: column; 
+
+}
+
+.defaultTabTitle {
+  margin-top: 0px;
+}
+
+.saveButton {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+
+  width: 106px;
+  height: 34px;
+
+  background: #F2EFE7;
+  border: 1px solid #868173;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.saveButtonCTA {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+
+  text-align: center;
+  
+  color: #000000;
+}
+
+.saveButton:hover {
+  cursor: pointer;
+  background: #AFA997;
+}
+
+.saveButton:hover .saveButtonCTA {
+  color: #FFFFFF;
+}
+
+.saveButton:active {
+  cursor: pointer;
+  background: #868173;
 }

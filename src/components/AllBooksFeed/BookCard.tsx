@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './BookCard.css'
 // import sampleAvailability from '../utils/sampleAvailabilityResponse'
-import savedLibraries from '../utils/libraries'
+import savedLibraries from '../../utils/libraries'
 const axios = require('axios');
 
 
@@ -70,12 +70,13 @@ const BookCard: React.FC<{
             arrangeLibraries(resp.data)
             console.log(resp)
             setChecked(true)
+            setTimeout(() => { loadOverlay(false) }, 3000);
         });
     }
 
     const clickHandler = () => {
         queryAvailability()
-        setTimeout(() => { loadOverlay(false) }, 3000);
+
     }
 
     return (

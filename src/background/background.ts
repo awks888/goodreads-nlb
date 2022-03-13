@@ -1,5 +1,7 @@
+import { setDefaultTab } from '../utils/storage'
+
 
 chrome.runtime.onInstalled.addListener(() => {
-  // TODO: on installed function
+  setDefaultTab("AllBooks")
 })
 
