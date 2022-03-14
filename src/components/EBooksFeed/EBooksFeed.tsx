@@ -64,7 +64,7 @@ const EBooksFeed: React.FC<{}> = () => {
 
     return (
         <div>
-            <SearchOverlay
+            {/* <SearchOverlay
                 modalVisible={searching}
             />
             <p className="response" >Title Searched: {title}</p>
@@ -84,8 +84,8 @@ const EBooksFeed: React.FC<{}> = () => {
             {titles && <div>
                 <p>{message}</p>
             </div>
-            }
-
+            } */}
+            <h1>Coming Soon</h1>
         </div>
     )
 }

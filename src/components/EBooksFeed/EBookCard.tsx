@@ -56,7 +56,8 @@ const EBookCard: React.FC<{
             setAvailable(true)
         }
 
-        setChecked(!checked)
+        setTimeout(() => { loadOverlay(false) }, 3000);
+        setChecked(true)
     }
 
     //query Availability from NLB API and populate info after. 
@@ -66,8 +67,6 @@ const EBookCard: React.FC<{
 
         axios.get(url).then(resp => {
             arrangeLibraries(resp.data)
-            console.log(resp)
-            setChecked(true)
         });
     }
 
