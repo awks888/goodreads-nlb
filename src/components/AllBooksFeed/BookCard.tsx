@@ -25,7 +25,7 @@ const BookCard: React.FC<{
     // const sample = sampleAvailability['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item']
 
     //takes in array of response items and sets the 2 library array states
-    const arrangeLibraries = (collection) => {
+    function arrangeLibraries(collection) {
         const availableLibs = [];
         const loanedLibs = [];
 
@@ -57,24 +57,27 @@ const BookCard: React.FC<{
         if (availableLibs.length > 0) {
             setAvailable(true)
         }
-
-        setTimeout(() => { loadOverlay(false) }, 3000);
-        setChecked(true)
+        // setTimeout(() => { setChecked(true) }, 3000);
+        // loadOverlay(false)
     }
 
     //query Availability from NLB API and populate info after. 
-    const queryAvailability = () => {
+    async function queryAvailability() {
         loadOverlay(true)
-        const url = `http://localhost:3000/availability?bid=${bid}`
+        const url = `https://boiling-plateau-78957.herokuapp.com/availability?bid=${bid}`
 
-        axios.get(url).then(resp => {
-            arrangeLibraries(resp.data)
+        await axios.get(url).then(resp => {
+            arrangeLibraries(resp.data['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item'])
+            setChecked(true)
+            loadOverlay(false)
         });
+
+
+
     }
 
     const clickHandler = () => {
         queryAvailability()
-
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, } from 'react'
 import ReactDOM from 'react-dom'
 import './options.css'
 import '../popup/popup.css'
@@ -44,6 +44,9 @@ const App: React.FC<{}> = () => {
               <p className={tab === "EBooks" ? "tabText-active" : "tabText"}>eBooks</p>
             </div>
           </div>
+        </div>
+        <div className="librarySection">
+          <div className="container">Hello There</div>
         </div>
         <div className="saveButton" onClick={handleSaveButtonClick}>
           <p className="saveButtonCTA">{formState === "ready" ? "Save" : "Saving..."}</p>

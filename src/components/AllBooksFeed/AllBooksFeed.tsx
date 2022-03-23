@@ -50,7 +50,7 @@ const AllBooksFeed: React.FC<{}> = () => {
     //query titles from NLB API and populate titles after
     const queryTitles = (title: string, author: string[]) => {
         loadOverlay(true)
-        let url = "http://localhost:3000/titles?" + `title=${title}`
+        let url = "https://boiling-plateau-78957.herokuapp.com/titles?" + `title=${title}`
 
         for (let i = 0; i < author.length; i++) {
             url = url + `&author=${author[i]}`

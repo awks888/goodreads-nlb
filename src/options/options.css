@@ -44,6 +44,7 @@ p {
   border-radius: 34px;
 }
 
+/*************** DEFAULT TAB SECTION ****************/
 
 .defaultTabSection {
   display: flex; 
@@ -54,6 +55,22 @@ p {
 .defaultTabTitle {
   margin-top: 0px;
 }
+
+/*************** LIBRARY SECTION ****************/
+
+.container {
+  position: relative;
+  width: var(--checkbox-size, 1.25rem);
+  height: var(--checkbox-size, 1.25rem);
+  background-color: #FFFFFF;
+  /* border: 0.125rem solid $grey-color;
+  transition: all 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 0.0625rem;
+  border-radius: 50%; */
+}
+
+
+/*************** SAVE BUTTON ****************/
 
 .saveButton {
   display: flex; 
