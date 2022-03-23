@@ -66,15 +66,16 @@ const BookCard: React.FC<{
         loadOverlay(true)
         const url = `https://boiling-plateau-78957.herokuapp.com/availability?bid=${bid}`
 
-        await axios.get(url).then(resp => {
-            arrangeLibraries(resp.data['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item'])
-            setChecked(true)
-            loadOverlay(false)
-        });
-
-
-
+        const request = await axios.get(url)
+        console.log("here 1")
+        arrangeLibraries(request.data['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item'])
+        console.log("here 2")
+        setChecked(true)
+        console.log("here 3")
+        loadOverlay(false)
+        console.log("here 4")
     }
+
 
     const clickHandler = () => {
         queryAvailability()
@@ -111,9 +112,9 @@ const BookCard: React.FC<{
                 :
                 //a clickable button prompting user to check for the book's availability
                 <div className="checkAvailButton" onClick={() => {
-                    loadOverlay(true)
+                    // loadOverlay(true)
                     clickHandler()
-                    setTimeout(() => { loadOverlay(false) }, 2000);
+                    // setTimeout(() => { loadOverlay(false) }, 2000);
 
                 }}>
                     <div className="CTAcontainer">
