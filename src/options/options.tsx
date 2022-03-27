@@ -2,55 +2,94 @@ import React, { useState, useEffect, } from 'react'
 import ReactDOM from 'react-dom'
 import './options.css'
 import '../popup/popup.css'
-import { tabType, getDefaultTab, setDefaultTab } from '../utils/storage'
+import { tabType, getLibrariesStorage, setLibrariesStorage } from '../utils/storage'
+import { defaultLibraries, libraryCodeNameMap, Libraries } from '../utils/libraries'
+// import FormGroup from '@mui/material/FormGroup';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 
 type FormState = "ready" | "saving"
 
 const App: React.FC<{}> = () => {
+  const [formState, setFormState] = useState<FormState>("ready")
+  const [savedLibraries, setSavedLibraries] = useState<Libraries>([])
+  const [checkedState, setCheckedState] = useState<boolean[]>([]);
+
+  //**** calling for saved libraries and filling up the checkboxes ****
+  let startState = new Array(defaultLibraries.length).fill(false) //create blank slate for checkboxes state
+
   useEffect(() => {
-    getDefaultTab().then((defaultTab) => {
-      setTab(defaultTab)
+    getLibrariesStorage().then((libraries) => { //call for saved libraries
+      for (let i = 0; i < libraries.length; i++) {
+        if (libraries[i].saved) {  //apply saved libraries to checkbox state
+          startState[i] = true
+        }
+      }
+      setSavedLibraries(libraries)
+      setCheckedState(startState)
     })
   }, [])
 
-  const [tab, setTab] = useState<tabType>("AllBooks")
-  const [formState, setFormState] = useState<FormState>("ready")
+  //**** functions for button clicks****
+  const handleCheckBoxChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+    setCheckedState(updatedCheckedState);
+  }
 
   const handleSaveButtonClick = () => {
     setFormState("saving")
-    setDefaultTab(tab).then(() => {
+
+    let updatedSavedLibraries = savedLibraries
+    for (let i = 0; i < updatedSavedLibraries.length; i++) {
+      if (checkedState[i]) {
+        updatedSavedLibraries[i].saved = true
+      } else {
+        updatedSavedLibraries[i].saved = false
+      }
+      setSavedLibraries(updatedSavedLibraries)
+    }
+
+    setLibrariesStorage(savedLibraries).then(() => {
       setTimeout(() => {
         setFormState("ready")
       }, 1000)
     })
   }
 
-
   return (
     <div>
-      <h1 className="optionsTitle">Options</h1>
-      <div className="optionsSection">
-        <div className="defaultTabSection">
-          <h2 className="defaultTabTitle">Default Tab on Opening Popup</h2>
-          <div className="tabContainer">
-            <div className={tab === "AllBooks" ? "tab-active" : "tab"} onClick={() => {
-              setTab("AllBooks")
-            }}>
-              <p className={tab === "AllBooks" ? "tabText-active" : "tabText"}>All Books</p>
-            </div>
-            <div className={tab === "EBooks" ? "tab-active" : "tab"} onClick={() => {
-              setTab("EBooks")
-            }}>
-              <p className={tab === "EBooks" ? "tabText-active" : "tabText"}>eBooks</p>
-            </div>
+      <div>
+        <h1 className="optionsTitle">Options</h1>
+        <div className="optionsSection">
+          <div className="toppings-list">
+            {/* <ul className="toppings-list"> */}
+            {savedLibraries.map((item, index) => {
+              return (
+                // <li key={index}>
+                <div className="toppings-list-item">
+                  <div className="left-section">
+                    <input
+                      type="checkbox"
+                      id={`custom-checkbox-${index}`}
+                      name={item.code}
+                      checked={checkedState[index]}
+                      onChange={() => handleCheckBoxChange(index)}
+                    />
+                    <label htmlFor={`custom-checkbox-${index}`}>{libraryCodeNameMap[item.code]}</label>
+                  </div>
+                </div>
+                // </li>
+              );
+            })}
+            {/* </ul> */}
           </div>
+
         </div>
-        <div className="librarySection">
-          <div className="container">Hello There</div>
-        </div>
-        <div className="saveButton" onClick={handleSaveButtonClick}>
-          <p className="saveButtonCTA">{formState === "ready" ? "Save" : "Saving..."}</p>
-        </div>
+      </div>
+      <div className="saveButton" onClick={handleSaveButtonClick}>
+        <p className="saveButtonCTA">{formState === "ready" ? "Save" : "Saving..."}</p>
       </div>
     </div>
   )

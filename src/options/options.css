@@ -32,16 +32,28 @@ p {
 
 
 .optionsSection {
-  display: flex; 
+  display: block; 
   flex-direction: column; 
   justify-content: space-around;
-
+  overflow: scroll;
+  
   width: 542px;
-  height: 319px;
+  height: 500px;
   padding: 0px 10px 10px 20px; 
 
   background: #F2EFE7;
   border-radius: 34px;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
 /*************** DEFAULT TAB SECTION ****************/
@@ -110,4 +122,44 @@ p {
 .saveButton:active {
   cursor: pointer;
   background: #868173;
+}
+
+
+
+
+
+
+
+
+.toppings-list,
+.total {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.toppings-list {
+  list-style: none;
+  padding: 0;
+}
+
+.toppings-list li {
+  margin-bottom: 0.5rem;
+}
+
+.toppings-list-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  margin: 5px 0px 5px 0px;
+}
+
+/* .toppings-list li:last-child {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  padding-top: 1rem;
+} */
+
+.toppings-list-item label {
+  vertical-align: text-bottom;
+  margin-left: 0.2rem;
 }

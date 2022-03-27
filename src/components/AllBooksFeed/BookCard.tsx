@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './BookCard.css'
 // import sampleAvailability from '../utils/sampleAvailabilityResponse'
-import savedLibraries from '../../utils/libraries'
+import { defaultLibraries, libraryCodeNameMap } from '../../utils/libraries'
 const axios = require('axios');
 
 
@@ -22,7 +22,9 @@ const BookCard: React.FC<{
     const [availableLibraries, setAvailableLibraries] = useState<string[]>([]);
     const [loanedLibraries, setLoanedLibraries] = useState<string[]>([]);
 
-    // const sample = sampleAvailability['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item']
+    //filter out only the libraries we have saved
+    let savedLibraries = defaultLibraries.filter(library => library.saved === true)
+    console.log(libraryCodeNameMap)
 
     //takes in array of response items and sets the 2 library array states
     function arrangeLibraries(collection) {
@@ -34,31 +36,36 @@ const BookCard: React.FC<{
             const libraryCode = collection[i]['BranchID']['_text']
             const status = collection[i]['StatusDesc']['_text']
 
-            if (libraryCode in savedLibraries) { //check if library is inside the libraries of concern
-                if (savedLibraries[libraryCode]['available'] !== "available") { //if the library is already available let's not process
-                    if (status === "Not on Loan") {
-                        savedLibraries[libraryCode]['available'] = 'available' //if the book is available at this library let's make it available
-                    } else {
-                        savedLibraries[libraryCode]['available'] = 'loaned' //otherwise mark book as loaned
+            for (let j = 0; j < savedLibraries.length; j++) {
+                if (libraryCode === savedLibraries[j].code) {
+                    if (savedLibraries[j]['available'] !== "available") { //if the library is already available let's not process
+                        if (status === "Not on Loan") {
+                            savedLibraries[j]['available'] = 'available' //if the book is available at this library let's make it available
+                        } else {
+                            savedLibraries[j]['available'] = 'loaned' //otherwise mark book as loaned
+                        }
                     }
                 }
             }
         }
+
+        //we add the libraries into their respective arrays, depending on whether they are available
         for (const savedLibrary in savedLibraries) {
             if (savedLibraries[savedLibrary]['available'] === "available") {
-                availableLibs.push(savedLibraries[savedLibrary]['name'])
+                const code = savedLibraries[savedLibrary]['code']
+                availableLibs.push(libraryCodeNameMap[code])
             } else if (savedLibraries[savedLibrary]['available'] === "loaned") {
-                loanedLibs.push(savedLibraries[savedLibrary]['name'])
+                const code = savedLibraries[savedLibrary]['code']
+                loanedLibs.push(libraryCodeNameMap[code])
             }
         }
+        //set the states
         setAvailableLibraries(availableLibs)
         setLoanedLibraries(loanedLibs)
 
         if (availableLibs.length > 0) {
             setAvailable(true)
         }
-        // setTimeout(() => { setChecked(true) }, 3000);
-        // loadOverlay(false)
     }
 
     //query Availability from NLB API and populate info after. 
@@ -67,13 +74,10 @@ const BookCard: React.FC<{
         const url = `https://boiling-plateau-78957.herokuapp.com/availability?bid=${bid}`
 
         const request = await axios.get(url)
-        console.log("here 1")
         arrangeLibraries(request.data['s:Envelope']['s:Body']['GetAvailabilityInfoResponse']['Items']['Item'])
-        console.log("here 2")
         setChecked(true)
-        console.log("here 3")
         loadOverlay(false)
-        console.log("here 4")
+
     }
 
 
@@ -112,9 +116,7 @@ const BookCard: React.FC<{
                 :
                 //a clickable button prompting user to check for the book's availability
                 <div className="checkAvailButton" onClick={() => {
-                    // loadOverlay(true)
                     clickHandler()
-                    // setTimeout(() => { loadOverlay(false) }, 2000);
 
                 }}>
                     <div className="CTAcontainer">
