@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './BookCard.css'
 // import sampleAvailability from '../utils/sampleAvailabilityResponse'
-import { defaultLibraries, libraryCodeNameMap } from '../../utils/libraries'
+import { defaultLibraries, libraryCodeNameMap, Libraries } from '../../utils/libraries'
+import { getLibrariesStorage } from '../../utils/storage'
 const axios = require('axios');
 
 
@@ -21,15 +22,24 @@ const BookCard: React.FC<{
     //create 2 array states for libraries
     const [availableLibraries, setAvailableLibraries] = useState<string[]>([]);
     const [loanedLibraries, setLoanedLibraries] = useState<string[]>([]);
+    const [savedLibraries, setSavedLibraries] = useState<Libraries>([])
+
+    useEffect(() => {
+        getLibrariesStorage().then((libraries) => {
+            const savedLibraries = libraries.filter(library => library.saved === true)
+            setSavedLibraries(savedLibraries)
+        })
+
+    }, [])
 
     //filter out only the libraries we have saved
-    let savedLibraries = defaultLibraries.filter(library => library.saved === true)
-    console.log(libraryCodeNameMap)
+
 
     //takes in array of response items and sets the 2 library array states
     function arrangeLibraries(collection) {
         const availableLibs = [];
         const loanedLibs = [];
+
 
         for (let i = 0; i < collection.length; i++) {
             //identify all the attributes of the book
