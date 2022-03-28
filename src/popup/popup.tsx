@@ -9,11 +9,11 @@ import { tabType, getDefaultTab } from '../utils/storage'
 const App: React.FC<{}> = () => {
   const [tab, setTab] = useState<tabType>("AllBooks")
 
-  useEffect(() => {
-    getDefaultTab().then((defaultTab) => {
-      setTab(defaultTab)
-    })
-  }, [])
+  // useEffect(() => {
+  //   getDefaultTab().then((defaultTab) => {
+  //     setTab(defaultTab)
+  //   })
+  // }, [])
 
   const handleOptionsClick = () => {
     chrome.runtime.openOptionsPage()
@@ -22,7 +22,7 @@ const App: React.FC<{}> = () => {
   return (
     <div>
       <div className="topBar">
-        <div className="tabContainer">
+        {/* <div className="tabContainer">
           <div className={tab === "AllBooks" ? "tab-active" : "tab"} onClick={() => {
             setTab("AllBooks")
           }}>
@@ -33,7 +33,7 @@ const App: React.FC<{}> = () => {
           }}>
             <p className={tab === "EBooks" ? "tabText-active" : "tabText"}>eBooks</p>
           </div>
-        </div>
+        </div> */}
         <div className="optionsButton" onClick={handleOptionsClick}>
           <p className="optionsCTA">Options</p>
         </div>

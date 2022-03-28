@@ -12,6 +12,7 @@ const AllBooksFeed: React.FC<{}> = () => {
     const [author, setAuthor] = useState<string | void>("")
     const [searching, setSearching] = useState<boolean>(false)
     const [message, setMessage] = useState<string>("loading...")
+    const [error, setError] = useState<boolean>(false)
 
     //list of returned titles
     const [titles, setTitles] = useState<any[]>([])
@@ -56,12 +57,32 @@ const AllBooksFeed: React.FC<{}> = () => {
             url = url + `&author=${author[i]}`
         }
         axios.get(url).then(resp => {
-            setTitles(resp.data['s:Envelope']['s:Body']['SearchResponse']['Titles']['Title'])
-            setMessage("")
-            loadOverlay(false)
+            const status = resp.data['s:Envelope']['s:Body']['SearchResponse']['Status']['_text']
+            console.log(status)
+            if (status === "OK") {
+                const titles = resp.data['s:Envelope']['s:Body']['SearchResponse']['Titles']['Title']
+                if (titles.length > 0) {
+                    setTitles(titles)
+                } else {
+                    setError(true)
+                }
+                setMessage("")
+                loadOverlay(false)
+            } else {
+                setError(true)
+            }
+
+
         });
     }
 
+    const EmptyState = () => {
+        return (
+            <div>
+                <h1>No Data found.</h1>
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -70,18 +91,21 @@ const AllBooksFeed: React.FC<{}> = () => {
             />
             <p className="response" >Title Searched: {title}</p>
             <p className="response" >Author Searched: {author}</p>
-            {titles.map((title, index) => {
-                return <BookCard
-                    id={index}
-                    bid={title['BID']['_text']}
-                    isbn={title['ISBN']['_text']}
-                    titleName={title['TitleName']['_text']}
-                    author={title['Author']['_text']}
-                    publishYear={title['PublishYear']['_text']}
-                    loadOverlay={loadOverlay}
-                    key={index}
-                />
-            })}
+            {error ?
+                <EmptyState />
+                :
+                titles.map((title, index) => {
+                    return <BookCard
+                        id={index}
+                        bid={title['BID']['_text']}
+                        isbn={title['ISBN']['_text']}
+                        titleName={title['TitleName']['_text']}
+                        author={title['Author']['_text']}
+                        publishYear={title['PublishYear']['_text']}
+                        loadOverlay={loadOverlay}
+                        key={index}
+                    />
+                })}
             {titles && <div>
                 <p>{message}</p>
             </div>

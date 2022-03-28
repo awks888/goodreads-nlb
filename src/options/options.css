@@ -3,6 +3,7 @@ body {
   flex-direction: column;
   background-color: #FFFFFF;
   padding: 20px 35px 20px 35px;
+  font-family: Georgia;
 
 }
 
@@ -28,6 +29,7 @@ h2 {
 
 p {
   font-family: Georgia;
+  font-size: 23px;
 }
 
 
@@ -81,6 +83,37 @@ p {
   border-radius: 50%; */
 }
 
+.toppings-list,
+.total {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.toppings-list {
+  list-style: none;
+  padding: 0;
+}
+
+
+.toppings-list-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  margin: 5px 0px 5px 0px;
+}
+
+/* .toppings-list li:last-child {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  padding-top: 1rem;
+} */
+
+.toppings-list-item label {
+  vertical-align: text-bottom;
+  margin-left: 0.2rem;
+  
+}
+
 
 /*************** SAVE BUTTON ****************/
 
@@ -92,6 +125,7 @@ p {
 
   width: 106px;
   height: 34px;
+  margin-top: 10px;
 
   background: #F2EFE7;
   border: 1px solid #868173;
@@ -131,35 +165,3 @@ p {
 
 
 
-.toppings-list,
-.total {
-  width: 100%;
-  margin: 0 auto;
-}
-
-.toppings-list {
-  list-style: none;
-  padding: 0;
-}
-
-.toppings-list li {
-  margin-bottom: 0.5rem;
-}
-
-.toppings-list-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  margin: 5px 0px 5px 0px;
-}
-
-/* .toppings-list li:last-child {
-  border-top: 1px solid #ccc;
-  margin-top: 1rem;
-  padding-top: 1rem;
-} */
-
-.toppings-list-item label {
-  vertical-align: text-bottom;
-  margin-left: 0.2rem;
-}

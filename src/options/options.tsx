@@ -63,6 +63,7 @@ const App: React.FC<{}> = () => {
       <div>
         <h1 className="optionsTitle">Options</h1>
         <div className="optionsSection">
+          <p>Select your favourite libraries to visit:</p>
           <div className="toppings-list">
             {/* <ul className="toppings-list"> */}
             {savedLibraries.map((item, index) => {
