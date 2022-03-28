@@ -35,7 +35,7 @@ const App: React.FC<{}> = () => {
           </div>
         </div> */}
         <div className="optionsButton" onClick={handleOptionsClick}>
-          <p className="optionsCTA">Options</p>
+          <p className="optionsCTA">Choose Your Libraries Here</p>
         </div>
       </div>
       {tab === "AllBooks" ?

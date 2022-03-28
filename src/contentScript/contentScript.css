@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-evenly;
 
-    width: 110px;
+    width: 137px;
     height: 29px;
     left: 195px;
     top: 562px;
@@ -15,10 +15,10 @@
     border-radius: 2px;
 }
 
-.searchButton:hover {
+/* .searchButton:hover {
     cursor: pointer;
     background: #FF6720;
-}
+} */
 
 .searchCTA {
     margin: 0px;
@@ -30,9 +30,9 @@
     line-height: 15px;
 }
 
-.searchButton:hover .searchCTA {
+/* .searchButton:hover .searchCTA {
     color: #FFFFFF;
-}
+} */
 
 .searchLogo {
     max-height: 19px;

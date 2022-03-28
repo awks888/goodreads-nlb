@@ -9,7 +9,7 @@ const App: React.FC<{}> = () => {
     return <div className="searchButton">
         <img className="searchLogo" src="https://mobileapp.nlb.gov.sg/images/NEW_NLB_mobile-app-icon_dark%20orange_final.png"></img>
         {/* <p className="searchCTA">Search NLB</p> */}
-        <p className="searchCTA" >Search NLB</p>
+        <p className="searchCTA" >Search on NLB</p>
     </div>
 }
 

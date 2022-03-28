@@ -4,14 +4,14 @@
   "version": "1.0.0",
   "manifest_version": 3,
   "icons": {
-    "16": "icon.png",
-    "48": "icon.png",
-    "128": "icon.png"
+    "16": "nlblogo.png",
+    "48": "nlblogo.png",
+    "128": "nlblogo.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_title": "Goodreads NLB",
-    "default_icon": "goodreads.png"
+    "default_icon": "nlblogo.png"
   },
   "permissions": [
     "storage",
